@@ -1,0 +1,81 @@
+ #include<stdio.h>
+  2 int main()
+  3 {
+  4     int i,n,ch,v;
+  5
+  6     printf("Enter size of queue:");
+  7     scanf("%d",&n);
+  8     if(n<=0)
+  9     {
+ 10         printf("Invalid size!\n");
+ 11         return 1;
+ 12     }
+ 13     int queue[n];
+ 14     int f=-1,r=-1;/*front and rear;-1 means empty*/
+ 15
+ 16     while(1)
+ 17     {
+ 18         printf("\nMENU\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit\n");
+ 19         printf("Enter your choice:");
+ 20         scanf("%d",&ch);
+ 21
+ 22         if(ch==1)/*Enqueue*/
+ 23         {
+ 24             if(r==n-1)
+ 25             {
+ 26                 printf("Queue is full!\n");
+ 27             }
+ 28             else
+ 29             {
+ 30                 printf("Enter the element:");
+ 31                 scanf("%d",&v);
+ 32                 r=r+1;
+ 33                 queue[r]=v;
+ 34                 if(f==-1)
+ 35                 {
+ 36                     f=0;
+ 37                 }
+ 38             }
+ 39         }
+ 40         else if(ch==2)/*Dequeue*/
+ 41         {
+ 42             if(f==-1||f>r)
+ 43             {
+ 44                 printf("Queue is empty!\n");
+ 45             }
+ 46             else
+ 47             {
+ 48                 printf("Deleted %d\n",queue[f]);
+ 49                 f=f+1;/*move front forward*/
+ 50             }
+ 51         }
+ 52         else if(ch==3)/*Display*/
+ 53         {
+ 54             if(f==-1||f>r)
+ 55             {
+ 56                 printf("Queue is empty!\n");
+ 57             }
+ 58             else
+ 59             {
+ 60                 printf("Queue is:");
+ 61                 for(i=f;i<=r;i++)
+ 62                 {
+ {
+ 63                     printf("%d",queue[i]);
+ 64                 ^
+ 65                 printf("\n");
+ 66             }
+ 67         }
+ 68         else if(ch==4)/*Exit*/
+ 69         {
+ 70             break;
+ 71         }
+ 72         else
+ 73         {
+ 74             printf("Invalid choice!\n");
+ 75         }
+ 76     }
+ 77     return 0;
+ 78 }
+ 79
+
