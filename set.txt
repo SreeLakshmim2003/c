@@ -1,0 +1,86 @@
+ #include<stdio.h>
+  2 #define SIZE 9
+  3 typedef struct{
+  4     unsigned char x:1;
+  5 }bit;
+  6 /* universal set(hardcoded) */
+  7 const int uset[SIZE]={1,2,3,4,5,6,7,8,9};
+  8 void readset(bit a[],int n);
+  9 void printset(const bit a[]);
+ 10 void unionset(const bit a[],const bit b[],bit c[]);
+ 11 void intersect(const bit a[],const bit b[],bit c[]);
+ 12 void difference(const bit a[],const bit b[],bit c[]);
+ 13 int main(void)
+ 14 {
+ 15     bit a[SIZE]={{0}},b[SIZE]={{0}},c[SIZE]={{0}};
+ 16     int n;
+ 17     printf("Universal set:{1,2,3,4,5,6,7,8,9}\n\n");
+ 18     printf("No. of elements in set A:");
+ 19     if(scanf("%d",&n)!=1)
+ 20         return 1;
+ 21     readset(a,n);
+ 22     printf("No. of elements in B:");
+ 23     if(scanf("%d",&n)!=1)
+ 24         return 1;
+ 25     readset(b,n);
+ 26     printf("\nSet A:");
+ 27     printset(a);
+ 28     printf("set B:");
+ 29     printset(b);
+ 30     unionset(a,b,c);
+ 31     printf("\n\tA uB=");
+ 32     printset(c);
+ 33     intersect(a,b,c);
+ 34     printf("\n\tA intersect B=");
+ 35     printset(c);
+ 36     difference(a,b,c);
+ 37     printf("\n\tA-B=");
+ 38     printset(c);
+ 39     return 0;
+ 40 }
+ 41 /* Read n elememts of a subset and store as a bit string */
+ 42 void readset(bit a[],int n)
+ 43 {
+ 44     int i,k,x;
+ 45     if(n<0 || n>SIZE){
+ 46         printf("Invalid size; must be between 0 and %d.\n",SIZE);
+ 47         return;
+ 48     }
+ 49     printf("Enter %d elements:",n);
+ 50     for(i=0;i<n;i++){
+ 51         if(scanf("%d",&x)!=1)return;
+ 52         for(k=0;k<SIZE;k++){
+ 53             if(uset[k]==x){a[k].x=1;break;}
+ 54             }
+ 55             if(k==SIZE)
+ 56                 printf("%d is not in the universal set,ignored.\n",x);
+ 57             }
+ 58         }
+ 59         /* print a set from its bit string representation */
+ 60         void printset(const bit a[])
+ 61         {
+		 int k,first=1;
+ 63             printf("{");
+ 64             for(k=0;k<SIZE;k++){
+ 65                 if(a[k].x){
+ 66                     printf(first ? "%d":",%d",uset[k]);
+ 67                     first=0;
+ 68                 }
+ 69             }
+ 70             printf("}\n");
+ 71         }
+ 72         void unionset(const bit a[],const bit b[],bit c[])
+ 73         {
+ 74             for(int k=0;k<SIZE;k++)
+ 75                 c[k].x=a[k].x | b[k].x;
+ 76         }
+ 77         void intersect(const bit a[],const bit b[],bit c[])
+ 78         {
+ 79             for(int k=0;k<SIZE;k++)
+ 80                 c[k].x=a[k].x&b[k].x;
+ 81         }
+ 82         void difference(const bit a[],const bit b[],bit c[])
+ 83         {
+ 84             for(int k=0;k<SIZE;k++)
+ 85                 c[k].x=a[k].x && !b[k].x;
+ 86         }
