@@ -1,0 +1,68 @@
+ 1 #include<stdio.h>
+  2 #include<stdlib.h>
+  3 struct Node{
+  4     int data;
+  5     struct Node*left,*right;
+  6 };
+  7 struct Node*insert(struct Node*root,int x){
+  8     if(root==NULL){
+  9         root=malloc(sizeof(struct Node));
+ 10         root->data=x;
+ 11         root->left=root->right=NULL;
+ 12     }
+ 13     else if(x<root->data)root->left=insert(root->left,x);
+ 14     else
+ 15         root->right=insert(root->right,x);
+ 16     return root;
+ 17 }
+ 18 void inorder(struct Node*root){
+ 19     if(root!=NULL){
+ 20         inorder(root->left);
+ 21         printf("%d",root->data);
+ 22         inorder(root->right);
+ 23     }
+ 24 }
+ 25 void preorder(struct Node*root)
+ 26 {
+ 27     if(root!=NULL){
+ 28         printf("%d",root->data);
+ 29         preorder(root->left);
+ 30         preorder(root->right);
+ 31     }
+ 32 }
+ 33 void postorder(struct Node*root){
+ 34     if(root!=NULL){
+ 35         postorder(root->left);
+ 36         postorder(root->right);
+ 37         printf("%d",root->data);
+ 38     }
+ 39 }
+  40 int main(){
+ 41     struct Node*root=NULL;
+ 42     int ch,x;
+ 43     while(1){
+ 44         printf("\n1.Insert\n2.Inorder\n3.Preorder");
+ 45         printf("\n4.Postorder\n5.Exit\n");
+ 46         scanf("%d",&ch);
+ 47         switch(ch){
+ 48             case 1:
+ 49                 printf("Enter value:");
+ 50                 scanf("%d",&x);
+ 51                 root=insert(root,x);
+ 52                 break;
+ 53             case 2:
+ 54                 inorder(root);
+ 55                 break;
+ 56             case 3:
+ 57                 preorder(root);
+ 58                 break;
+ 59             case 4:
+ 60                 postorder(root);
+ 61                 break;
+ 62             case 5:
+ 63                 return 0;
+ 64             default:
+ 65                 printf("Invalid choice");
+ 66         }
+ 67     }
+ 68 }
